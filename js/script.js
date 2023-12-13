@@ -12,7 +12,6 @@ function randomWord() {
     let ranObj = wordList[Math.floor(Math.random() * wordList.length)];
     word = ranObj.word; //getting word of random object
     maxGuesses = 8; corrects = []; incorrects = [];
-    console.log(word);
 
     hint.innerText = ranObj.hint;
     guessLeft.innerText = maxGuesses;
@@ -31,7 +30,6 @@ function initGame(e) {
     let key = e.target.value;
     if(key.match(/^[A-Za-z]+$/) && !incorrects.includes(`${key}`)
         && !corrects.includes(key) ) {
-        console.log(key);
         if(word.includes(key)) { // if user letter found in the word
             for (let i = 0; i < word.length; i++) {
                 //showing matched letter in the input value
@@ -42,7 +40,7 @@ function initGame(e) {
             }
         } else {
             maxGuesses--; // decrement maxGueses by 1
-            incorrects.push(` ${key}`);
+            incorrects.push(key);
         }
         wrongLetter.innerText = incorrects;
         guessLeft.innerText = maxGuesses;
@@ -50,7 +48,8 @@ function initGame(e) {
     }
     typingInput.value = "";
 
-   if(corrects.length === word.length) { //if user found all letters
+   setTimeout(() => {
+    if(corrects.length === word.length) { //if user found all letters
         alert( `Congrats! You found the word ${word.toUpperCase()}`);
         randomWord(); // calling randomWord func, so the game reset 
    } else if(maxGuesses < 1) { // if user couldn't found all letters
@@ -60,8 +59,10 @@ function initGame(e) {
             inputs.querySelectorAll("input")[i].value = word[i];  
         }
     }
+   });
 }
 
 resetBtn.addEventListener("click",randomWord);
 typingInput.addEventListener("input", initGame);
+inputs.addEventListener("click", () => typingInput.focus());
 document.addEventListener("keydown", () => typingInput.focus());
