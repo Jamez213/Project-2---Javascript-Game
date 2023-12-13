@@ -49,7 +49,10 @@ function initGame(e) {
     }
     typingInput.value = "";
 
-    if(maxGuesses < 1) { // if user couldn't found all letters
+   if(corrects.length === word.length) { //if user found all letters
+        alert( `Congrats! You found the word ${word.toUpperCase()}`);
+        randomWord(); // calling randomWord func, so the game reset 
+   } else if(maxGuesses < 1) { // if user couldn't found all letters
         alert ("Game over! You don't have remaining guesses");
         for (let i = 0; i < word.length; i++) {
             //showing matched letter in the input value
