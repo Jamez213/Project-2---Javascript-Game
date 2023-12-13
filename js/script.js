@@ -14,8 +14,8 @@ function randomWord() {
     maxGuesses = 8; corrects = []; incorrects = [];
     console.log(word);
 
-    hint.innerText = ranObj.hint
-    guessLeft.innerText = maxGuesses
+    hint.innerText = ranObj.hint;
+    guessLeft.innerText = maxGuesses;
     wrongLetter.innerText = incorrects;
 
     let html = "";
@@ -44,8 +44,9 @@ function initGame(e) {
             maxGuesses--; // decrement maxGueses by 1
             incorrects.push(` ${key}`);
         }
-        guessLeft.innerText = maxGuesses;
         wrongLetter.innerText = incorrects;
+        guessLeft.innerText = maxGuesses;
+        
     }
     typingInput.value = "";
 
