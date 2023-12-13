@@ -25,6 +25,12 @@ function randomWord() {
 }
 randomWord();
 
+const guessSound = document.getElementById("guessSound");
+
+function playGuessSound() {
+    guessSound.currentTime = 0;
+    guessSound.play();
+}
 
 function initGame(e) {
     let key = e.target.value;
@@ -44,6 +50,8 @@ function initGame(e) {
         }
         wrongLetter.innerText = incorrects;
         guessLeft.innerText = maxGuesses;
+
+        playGuessSound();
         
     }
     typingInput.value = "";
